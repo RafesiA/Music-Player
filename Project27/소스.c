@@ -3,17 +3,23 @@
 #include <string.h>
 #include <windows.h>
 #include <conio.h>
-
+#include <ctype.h>
 
 #define MAX_CHAR_PER_LINE 1000
 
+
+
 // 연결 리스트
-typedef char dataName[MAX_CHAR_PER_LINE]; // 해당 파일이름, 길이지정
+typedef struct {
+	char data[MAX_CHAR_PER_LINE];
+} dataName; // 해당 파일이름, 길이지정
+
 //노드
 typedef struct Node {
 	dataName data;
 	struct Node *link;
 } Node;
+
 // 노드 포인터
 typedef struct LinkedList {
 	Node *head;
@@ -87,12 +93,12 @@ Node *get_node_at(LinkedList *list, int pos) {
 }
 
 
-void add(LinkedList *list, int position, dataName data) {
+void add(LinkedList *list, int position, dataName addData) {
 	Node *p;
 	if ((position >= 0) && (position <= list->length)) {
-		Node *node = (Node*)malloc(sizeof(Node));
-		if (node == NULL) error("메모리 할당에러");
-		node->data = data;
+		Node *node = (Node *)malloc(sizeof(Node));
+		if (node == NULL) printf("메모리 할당에러");
+		node->data = addData;
 		p = get_node_at(list, position - 1);
 		insert_node(&(list->head), p, node);
 		list->length++;
@@ -113,4 +119,23 @@ int is_empty(LinkedList *list) {
 		return 1;
 	}
 	else return 0;
+}
+
+void delete(LinkedList *list, int pos) {
+	if (!is_empty(list) && (pos >= 0) && (pos < list->length)) {
+		Node *p = get_node_at(list, pos - 1);
+		remove_node(&(list->head), p, (p != NULL) ? p->link : NULL);
+		list->length--;
+	}
+}
+
+
+
+int main() {
+	LinkedList buffer;
+	init(&buffer);
+	while (1) {
+		
+	}
+	
 }
