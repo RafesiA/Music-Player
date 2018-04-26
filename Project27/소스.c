@@ -129,13 +129,30 @@ void delete(LinkedList *list, int pos) {
 	}
 }
 
+void showMenu() {
+	printf("Music Player Based on Console\n");
+	printf("Select Menu\n");
+}
+
+void menu(int i) {
+	switch (i) {
+	case 1:
+		printf("You chosen number 1\n\n");
+
+	}
+}
+
 
 
 int main() {
+	int input;
 	LinkedList buffer;
 	init(&buffer);
-	while (1) {
-		
-	}
+
+	do {
+		showMenu();
+		scanf("%d", &input);
+		menu(input);
+	} while (input != 0);
 	
 }
