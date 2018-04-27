@@ -105,6 +105,13 @@ void add(LinkedList *list, int position, dataName addData) {
 	}
 }
 
+void delete(LinkedList *list, int pos) {
+	if (!is_empty(list) && (pos >= 0) && (pos < list->length)) {
+		Node *p = get_node_at(list, pos - 1);
+		remove_node(&(list->head), p, (p != NULL) ? p->link : NULL);
+		list->length--;
+	}
+}
 
 void add_last(LinkedList *list, dataName data) {
 	add(list, get_length(list), data);
@@ -121,17 +128,28 @@ int is_empty(LinkedList *list) {
 	else return 0;
 }
 
-void delete(LinkedList *list, int pos) {
-	if (!is_empty(list) && (pos >= 0) && (pos < list->length)) {
-		Node *p = get_node_at(list, pos - 1);
-		remove_node(&(list->head), p, (p != NULL) ? p->link : NULL);
-		list->length--;
+
+void display(LinkedList *buffer) {
+	int i;
+	Node *tmp_node;
+	tmp_node = buffer->head;
+
+	printf("Player List\n");
+	for (i = 0; i < buffer->length; i++) {
+		printf("%s", tmp_node->data.data);
 	}
 }
 
 void showMenu() {
 	printf("Music Player Based on Console\n");
 	printf("Select Menu\n");
+	printf("0. Exit Music Player\n");
+	printf("1. Add Music\n");
+	printf("2. Delete Music from List\n");
+	printf("3. Play Music\n");
+	printf("4. Play Random Music\n");
+	printf("5. Reverse Play List\n");
+	printf("6. Show Current List\n");
 }
 
 void menu(int i) {
